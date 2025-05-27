@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 240 10% 98%; /* #F5F7FA */
+  --foreground: 240 10% 15%; /* #1F2937 */
+  --muted: 240 5% 96%; /* #F8FAFC */
+  --muted-foreground: 240 4% 46%; /* #64748B */
+  --popover: 240 10% 98%; /* #F5F7FA */
+  --popover-foreground: 240 10% 15%; /* #1F2937 */
+  --card: 0 0% 100%; /* #FFFFFF */
+  --card-foreground: 240 10% 15%; /* #1F2937 */
+  --border: 240 6% 90%; /* #E2E8F0 */
+  --input: 240 6% 90%; /* #E2E8F0 */
+  --primary: 214 84% 56%; /* #3B82F6 */
+  --primary-foreground: 0 0% 98%; /* #FAFAFA */
+  --secondary: 240 5% 96%; /* #F8FAFC */
+  --secondary-foreground: 240 6% 10%; /* #0F172A */
+  --accent: 240 5% 96%; /* #F8FAFC */
+  --accent-foreground: 240 6% 10%; /* #0F172A */
+  --destructive: 0 84% 60%; /* #EF4444 */
+  --destructive-foreground: 0 0% 98%; /* #FAFAFA */
+  --ring: 214 84% 56%; /* #3B82F6 */
+  --radius: 0.5rem;
+  
+  /* Military-grade tactical colors for Maverick Security */
+  --tactical-black: 220 13% 8%; /* #0F1419 */
+  --command-green: 120 60% 25%; /* #2D5A3D */
+  --mission-amber: 45 100% 50%; /* #FFB000 */
+  --alert-red: 0 75% 45%; /* #CC3333 */
+  --intel-blue: 210 50% 30%; /* #3A5F7A */
+  --steel-gray: 215 15% 25%; /* #3A3F47 */
+  --tactical-white: 0 0% 95%; /* #F2F2F2 */
+  
+  /* Legacy colors for compatibility */
+  --navy: 220 13% 8%; /* Updated to tactical-black */
+  --professional-blue: 210 50% 30%; /* Updated to intel-blue */
+  --gold: 45 100% 50%; /* Updated to mission-amber */
+  --warm-gold: 45 85% 45%; /* Darker amber variant */
+  --charcoal: 215 15% 25%; /* Updated to steel-gray */
+}
+
+.dark {
+  --background: 240 10% 4%; /* #0A0E17 */
+  --foreground: 0 0% 98%; /* #FAFAFA */
+  --muted: 240 4% 16%; /* #1E293B */
+  --muted-foreground: 240 5% 65%; /* #94A3B8 */
+  --popover: 240 10% 4%; /* #0A0E17 */
+  --popover-foreground: 0 0% 98%; /* #FAFAFA */
+  --card: 240 10% 4%; /* #0A0E17 */
+  --card-foreground: 0 0% 98%; /* #FAFAFA */
+  --border: 240 4% 16%; /* #1E293B */
+  --input: 240 4% 16%; /* #1E293B */
+  --primary: 214 84% 56%; /* #3B82F6 */
+  --primary-foreground: 240 10% 4%; /* #0A0E17 */
+  --secondary: 240 4% 16%; /* #1E293B */
+  --secondary-foreground: 0 0% 98%; /* #FAFAFA */
+  --accent: 240 4% 16%; /* #1E293B */
+  --accent-foreground: 0 0% 98%; /* #FAFAFA */
+  --destructive: 0 63% 31%; /* #7F1D1D */
+  --destructive-foreground: 0 0% 98%; /* #FAFAFA */
+  --ring: 214 84% 56%; /* #3B82F6 */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  body.rtl {
+    font-family: 'Noto Sans Arabic', sans-serif;
+    direction: rtl;
+  }
+  
+  body.ltr {
+    font-family: 'Inter', sans-serif;
+    direction: ltr;
+  }
+}
+
+@layer utilities {
+  /* Tactical briefing gradients */
+  .hero-gradient {
+    background: linear-gradient(135deg, hsl(var(--tactical-black)) 0%, hsl(var(--intel-blue)) 100%);
+    position: relative;
+  }
+  
+  .hero-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(255, 176, 0, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(45, 90, 61, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  /* Military-grade interaction patterns */
+  .tactical-card {
+    background: linear-gradient(145deg, hsl(var(--steel-gray)) 0%, hsl(var(--tactical-black)) 100%);
+    border: 1px solid rgba(255, 176, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .tactical-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--mission-amber)), transparent);
+    transition: left 0.6s ease;
+  }
+  
+  .tactical-card:hover::before {
+    left: 100%;
+  }
+  
+  .tactical-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 176, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-color: hsl(var(--mission-amber));
+  }
+  
+  /* Mission briefing animations */
+  .briefing-enter {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .briefing-enter.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* Legacy fade-in for compatibility */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+    animation: tacticalFadeIn 0.8s ease forwards;
+  }
+  
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .navy {
+    color: hsl(var(--navy));
+  }
+  
+  .bg-navy {
+    background-color: hsl(var(--navy));
+  }
+  
+  .text-gold {
+    color: hsl(var(--gold));
+  }
+  
+  .bg-gold {
+    background-color: hsl(var(--gold));
+  }
+  
+  .text-warm-gold {
+    color: hsl(var(--warm-gold));
+  }
+  
+  .bg-warm-gold {
+    background-color: hsl(var(--warm-gold));
+  }
+  
+  .text-charcoal {
+    color: hsl(var(--charcoal));
+  }
+  
+  .bg-charcoal {
+    background-color: hsl(var(--charcoal));
+  }
+  
+  /* Tactical color utilities */
+  .text-tactical-black {
+    color: hsl(var(--tactical-black));
+  }
+  
+  .bg-tactical-black {
+    background-color: hsl(var(--tactical-black));
+  }
+  
+  .text-tactical-white {
+    color: hsl(var(--tactical-white));
+  }
+  
+  .bg-tactical-white {
+    background-color: hsl(var(--tactical-white));
+  }
+  
+  .text-mission-amber {
+    color: hsl(var(--mission-amber));
+  }
+  
+  .bg-mission-amber {
+    background-color: hsl(var(--mission-amber));
+  }
+  
+  .text-command-green {
+    color: hsl(var(--command-green));
+  }
+  
+  .bg-command-green {
+    background-color: hsl(var(--command-green));
+  }
+  
+  .text-steel-gray {
+    color: hsl(var(--steel-gray));
+  }
+  
+  .bg-steel-gray {
+    background-color: hsl(var(--steel-gray));
+  }
+  
+  .border-mission-amber {
+    border-color: hsl(var(--mission-amber));
+  }
+  
+  .border-command-green {
+    border-color: hsl(var(--command-green));
+  }
+  
+  .border-steel-gray {
+    border-color: hsl(var(--steel-gray));
+  }
+}
+
+@keyframes tacticalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes missionScanline {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes tacticalPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 176, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 176, 0, 0);
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+/* Arabic Typography */
+.arabic-text {
+  font-family: 'Noto Sans Arabic', sans-serif;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+/* English Typography */
+.english-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* SEO and Accessibility */
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+/* Custom scrollbar for better UX */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--navy));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--professional-blue));
+}
